@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.scene.layout.StackPane;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -24,6 +25,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import com.gluonhq.maps.MapView;
+import com.gluonhq.maps.MapPoint;
 
 public class Controller implements Initializable {
 
@@ -55,6 +59,9 @@ public class Controller implements Initializable {
     private ProgressIndicator progressIndicator;
 
     @FXML
+    private StackPane stackPane;
+
+    @FXML
     private TextField searchField;
 
     LoadReportService loader;
@@ -66,6 +73,12 @@ public class Controller implements Initializable {
         events = FXCollections.observableArrayList();
         filteredData = new FilteredList<>(events);
         table.setItems(filteredData);
+
+        MapView mapView = new MapView();
+        mapView.setCenter(new MapPoint(41.9, 12.5)); // Roma
+        mapView.setZoom(5);
+        stackPane.getChildren().add(mapView);
+        stackPane.getChildren().get(1).setVisible(false);
 
         loader = loaderInit();
 
@@ -114,7 +127,6 @@ public class Controller implements Initializable {
 
         // Bind the search field to the table to automatically disable it when there are no events
         searchField.disableProperty().bind(Bindings.isEmpty(events));
-
     }
 
     // Method to generate the URL based on the input fields
@@ -155,7 +167,6 @@ public class Controller implements Initializable {
         });
         return loader;
     }
-
 
     /*
      * HANDLERS
@@ -232,4 +243,9 @@ public class Controller implements Initializable {
         Utilities.showDialog(Alert.AlertType.INFORMATION, "Information", "Events correctly saved to: "+ file.getAbsolutePath());
     }
 
+    @FXML
+    public void handleShowMap(){
+        stackPane.getChildren().get(0).setVisible(false);
+        stackPane.getChildren().get(1).setVisible(true);
+    }
 }
