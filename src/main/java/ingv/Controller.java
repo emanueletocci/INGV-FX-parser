@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
 
@@ -64,9 +65,17 @@ public class Controller implements Initializable {
     @FXML
     private TextField searchField;
 
-    LoadReportService loader;
-    ObservableList<INGVEvent> events;
-    FilteredList<INGVEvent> filteredData;
+    @FXML
+    private VBox mapContainer;
+
+    @FXML
+    private Button clearTableButton;
+
+    private LoadReportService loader;
+    private ObservableList<INGVEvent> events;
+    private FilteredList<INGVEvent> filteredData;
+    private CustomMapLayer earthquakeLayer;
+    private MapView mapView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -74,10 +83,14 @@ public class Controller implements Initializable {
         filteredData = new FilteredList<>(events);
         table.setItems(filteredData);
 
-        MapView mapView = new MapView();
-        mapView.setCenter(new MapPoint(41.9, 12.5)); // Roma
+        mapView = new MapView();
+        earthquakeLayer = new CustomMapLayer();
+        mapView.addLayer(earthquakeLayer);
+        mapView.setCenter(new MapPoint(41.9, 12.5)); // Rome
         mapView.setZoom(5);
-        stackPane.getChildren().add(mapView);
+
+
+        mapContainer.getChildren().add(mapView);
         stackPane.getChildren().get(1).setVisible(false);
 
         loader = loaderInit();
@@ -127,6 +140,7 @@ public class Controller implements Initializable {
 
         // Bind the search field to the table to automatically disable it when there are no events
         searchField.disableProperty().bind(Bindings.isEmpty(events));
+
     }
 
     // Method to generate the URL based on the input fields
@@ -177,6 +191,7 @@ public class Controller implements Initializable {
         Platform.exit();
     }
 
+    // handler for the clear button click. Clears the table and resets the input fields
     @FXML
     public void handleClear() {
         System.out.println(PrintColors.format("Clearing table...", PrintColors.YELLOW));
@@ -197,6 +212,7 @@ public class Controller implements Initializable {
         loader.restart();
     }
 
+    // handler for table view export on file
     @FXML
     public void handleAllExport(){
         FileChooser fileChooser = new FileChooser();
@@ -215,6 +231,7 @@ public class Controller implements Initializable {
         Utilities.showDialog(Alert.AlertType.INFORMATION, "Information", "Events correctly saved to: "+ file.getAbsolutePath());
     }
 
+    // handler for the export button click. Exports the selected events to a file
     @FXML
     public void handleExport(){
         ObservableList<INGVEvent> selectedItems = table.getSelectionModel().getSelectedItems();
@@ -243,9 +260,22 @@ public class Controller implements Initializable {
         Utilities.showDialog(Alert.AlertType.INFORMATION, "Information", "Events correctly saved to: "+ file.getAbsolutePath());
     }
 
+    // handler for the show map button
     @FXML
     public void handleShowMap(){
         stackPane.getChildren().get(0).setVisible(false);
         stackPane.getChildren().get(1).setVisible(true);
+
+        for(INGVEvent t : events){
+            System.out.println(t);
+            earthquakeLayer.addMarker(new MapPoint(t.getLatitude(), t.getLongitude()));
+        }
+    }
+
+    @FXML
+    public void handleShowTable(){
+        stackPane.getChildren().get(0).setVisible(true);
+        stackPane.getChildren().get(1).setVisible(false);
+        earthquakeLayer.clearMarkers();
     }
 }

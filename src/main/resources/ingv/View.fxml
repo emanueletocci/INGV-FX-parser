@@ -81,6 +81,11 @@
                   </HBox>
                </children>
             </VBox>
+            <VBox fx:id="mapContainer" alignment="TOP_CENTER" cache="true" spacing="10.0" visible="false" StackPane.alignment="TOP_CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#handleShowTable" text="Show Table" />
+               </children>
+            </VBox>
          </children>
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
