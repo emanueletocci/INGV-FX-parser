@@ -5,6 +5,7 @@ import com.gluonhq.maps.MapPoint;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import java.util.ArrayList;
@@ -17,13 +18,12 @@ public class CustomMapLayer extends MapLayer {
         Circle marker = new Circle(8, Color.RED);
         marker.setStroke(Color.WHITE);
 
-        // bind marker to the event
         marker.setUserData(event);
 
         Tooltip tooltip = new Tooltip(
-                "Magnitude: " + event.getMagnitude() + "\n" +
-                        "Depth: " + event.getDepthkm() + " km\n" +
-                        "Date: " + event.getTime()
+                "Magnitudo: " + event.getMagnitude() + "\n" +
+                        "Profondità: " + event.getDepthkm() + " km\n" +
+                        "Data: " + event.getTime()
         );
         Tooltip.install(marker, tooltip);
 
@@ -40,15 +40,20 @@ public class CustomMapLayer extends MapLayer {
         for (Node marker : markers) {
             INGVEvent event = (INGVEvent) marker.getUserData();
             MapPoint point = new MapPoint(event.getLatitude(), event.getLongitude());
-            Point2D mapPoint = getMapPoint(point.getLatitude(), point.getLongitude());
-            marker.setTranslateX(mapPoint.getX());
-            marker.setTranslateY(mapPoint.getY());
+
+            Point2D screenPoint = getMapPoint(point.getLatitude(), point.getLongitude());
+            marker.setTranslateX(screenPoint.getX());
+            marker.setTranslateY(screenPoint.getY());
         }
     }
 
     public void clearMarkers() {
         markers.clear();
         getChildren().clear();
+        markDirty();
+    }
+
+    public void refreshMap(){
         markDirty();
     }
 }

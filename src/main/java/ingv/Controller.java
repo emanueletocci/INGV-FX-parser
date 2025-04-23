@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.scene.layout.StackPane;
@@ -76,6 +77,8 @@ public class Controller implements Initializable {
     private FilteredList<INGVEvent> filteredData;
     private CustomMapLayer earthquakeLayer;
     private MapView mapView;
+    final double MIN_ZOOM = 3.0;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,7 +90,7 @@ public class Controller implements Initializable {
         earthquakeLayer = new CustomMapLayer();
         mapView.addLayer(earthquakeLayer);
         mapView.setCenter(new MapPoint(41.9, 12.5)); // Rome
-        mapView.setZoom(5);
+        mapView.setZoom(MIN_ZOOM);
 
 
         mapContainer.getChildren().add(mapView);
@@ -109,6 +112,10 @@ public class Controller implements Initializable {
         /*
          * LISTENERS & BINDINGS
          */
+
+
+        // force the map to refresh when the mouse is dragged
+        mapView.addEventHandler(MouseEvent.MOUSE_DRAGGED,e -> {earthquakeLayer.refreshMap();});
 
         // check the fairness of limit input
         limitField.textProperty().addListener((observable, oldValue, newValue) -> {

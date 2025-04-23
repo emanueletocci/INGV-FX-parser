@@ -25,7 +25,6 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleClose" text="Close" />
                   <MenuItem mnemonicParsing="false" onAction="#handleAllExport" text="Export on file" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleShowMap" text="Show map" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
