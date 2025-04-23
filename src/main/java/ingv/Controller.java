@@ -274,7 +274,6 @@ public class Controller implements Initializable {
         stackPane.getChildren().get(1).setVisible(true);
 
         for(INGVEvent t : events){
-            System.out.println(t);
             MapPoint mapPoint = new MapPoint(t.getLatitude(), t.getLongitude());
             earthquakeLayer.addMarker(mapPoint, t);
         }
