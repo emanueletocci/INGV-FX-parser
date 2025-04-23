@@ -20,9 +20,9 @@ public class CustomMapLayer extends MapLayer {
         marker.setUserData(event);
 
         Tooltip tooltip = new Tooltip(
-                "Magnitudo: " + event.getMagnitude() + "\n" +
-                        "Profondità: " + event.getDepthkm() + " km\n" +
-                        "Data: " + event.getTime()
+                "Magnitude: " + event.getMagnitude() + "\n" +
+                        "Depth: " + event.getDepthkm() + " km\n" +
+                        "Date: " + event.getTime()
         );
         Tooltip.install(marker, tooltip);
 
