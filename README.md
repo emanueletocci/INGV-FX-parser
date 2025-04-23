@@ -18,3 +18,5 @@ The app fetches data from a [network endpoint](https://webservices.ingv.it/swagg
 The application is entirely developed in ![JavaFX](https://openjfx.io/openjfx-docs/) and uses the following ![API](https://webservices.ingv.it/swagger-ui/dist/?url=https://ingv.github.io/openapi/fdsnws/event/0.0.1/event.yaml), provided by INGV, to fetch the results.
 
 The project has been tested on an armV8 (M1) processor (![IntelliJ Idea](https://www.jetbrains.com/idea/)) with build management via ![Apache Maven](https://maven.apache.org/). **JDK 24** provided by ![Oracle](https://www.oracle.com/java/technologies/downloads/), build 24+36-3646, was used.
+
+![Dashboard](screenshots/dashboard.jpg)
