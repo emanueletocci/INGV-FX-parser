@@ -45,6 +45,11 @@
             <artifactId>maps</artifactId>
             <version>${gluon.maps.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.ipgeolocation</groupId>
+            <artifactId>ipgeolocation</artifactId>
+            <version>1.0.16</version>
+        </dependency>
     </dependencies>
 
     <build>
