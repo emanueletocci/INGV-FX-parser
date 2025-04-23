@@ -279,10 +279,23 @@ public class Controller implements Initializable {
         }
     }
 
+    // show the table
     @FXML
     public void handleShowTable(){
         stackPane.getChildren().get(0).setVisible(true);
         stackPane.getChildren().get(1).setVisible(false);
         earthquakeLayer.clearMarkers();
+    }
+
+    // open github repository
+    @FXML
+    public void handleAbout() {
+        String url = "https://github.com/emanueletocci/INGV-FX-parser";
+        try {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Utilities.showDialog(Alert.AlertType.ERROR, "Error", "Error opening URL: " + e.getMessage());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package ingv;
 
 import javafx.application.Application;
+import javafx.application.HostServices;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,7 +13,6 @@ import java.io.IOException;
  * JavaFX App
  */
 public class INGVReport extends Application {
-
     private static Scene scene;
 
     @Override
