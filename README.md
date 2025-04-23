@@ -2,7 +2,7 @@
 ![JavaFX](https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white)
 ![Maven](https://img.shields.io/badge/apachemaven-C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-🇮🇹 Leggilo in ![italiano](README.it.md)! 
+🇮🇹 Leggilo in ![Italiano](README.it.md)! 
 # **INGV-FX parser** 🌎🫨
 **INGV-FX Parser** is a JavaFX desktop application that allows interactive visualization of **seismic data** provided by INGV *(Istituto Nazionale di Geofisica e Vulcanologia)*.
 The app fetches data from a [network endpoint](https://webservices.ingv.it/swagger-ui/dist/?url=https://ingv.github.io/openapi/fdsnws/event/0.0.1/event.yaml) and displays them both in a detailed table and on an interactive geographic map.
