@@ -2,7 +2,7 @@
 ![JavaFX](https://img.shields.io/badge/javafx-%23FF0000.svg?style=for-the-badge&logo=javafx&logoColor=white)
 ![Maven](https://img.shields.io/badge/apachemaven-C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
 
-🇬🇧 Read it in ![English]()!
+🇬🇧 Read it in ![English](README.md)!
 # **INGV-FX parser** 🌎🫨
 
 **INGV-FX Parser** è un’applicazione desktop JavaFX che consente di visualizzare in modo interattivo i **dati sismici** forniti dall’INGV *(Istituto Nazionale di Geofisica e Vulcanologia)*.
