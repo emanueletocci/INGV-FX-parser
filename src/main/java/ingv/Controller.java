@@ -268,7 +268,8 @@ public class Controller implements Initializable {
 
         for(INGVEvent t : events){
             System.out.println(t);
-            earthquakeLayer.addMarker(new MapPoint(t.getLatitude(), t.getLongitude()));
+            MapPoint mapPoint = new MapPoint(t.getLatitude(), t.getLongitude());
+            earthquakeLayer.addMarker(mapPoint, t);
         }
     }
 
